@@ -1,24 +1,24 @@
 # Agent Skills
 
-A personal curated collection of skills for AI-assisted development.
+A collection of skills for AI-assisted development.
 
-## Available Skills
+## Engineering Skills
 
-| Skill | Description | Location |
-|-------|-------------|----------|
-| agent-browser | Automates browser interactions for web testing, form filling, screenshots, and data extraction | `~/.claude/skills/agent-browser` |
-| better-auth-best-practices | TypeScript authentication framework integration | `~/.config/opencode/skills/better-auth-best-practices` |
-| fastapi-templates | Production-ready FastAPI projects with async patterns | `~/.config/opencode/skills/fastapi-templates` |
-| find-skills | Discover and install agent skills | `~/.agents/skills/find-skills` |
-| native-data-fetching | Network requests, API calls, and data fetching patterns | `~/.config/opencode/skills/native-data-fetching` |
-| plannotator-compound | Analyze plan archives and generate HTML dashboard reports | `~/.agents/skills/plannotator-compound` |
-| react:components | Convert Stitch designs into modular React components | `~/.agents/skills/react-components` |
-| skill-creator | Guide for creating effective skills | `~/.config/opencode/skills/skill-creator` |
-| supabase-postgres-best-practices | Postgres performance optimization | `~/.config/opencode/skills/supabase-postgres-best-practices` |
-| ui-ux-pro-max | UI/UX design intelligence | `~/.config/opencode/skills/ui-ux-pro-max` |
-| uv-package-manager | Fast Python dependency management | `~/.config/opencode/skills/uv-package-manager` |
-| vercel-react-best-practices | React and Next.js performance optimization | `~/.config/opencode/skills/vercel-react-best-practices` |
-| web-design-guidelines | Web Interface Guidelines compliance | `~/.config/opencode/skills/web-design-guidelines` |
+These skills are located in the `engineering/` directory:
+
+| Skill | Description |
+|-------|-------------|
+| subagent-driven-development | Execute implementation plans with independent tasks using fresh subagents and two-stage review |
+| writing-plans | Write implementation plans using progressive disclosure — detailed tasks for current phase only, future phases stubbed |
+| triage | Triage issues through a state machine driven by triage roles |
+| to-prd | Turn conversation context into a PRD and publish to issue tracker |
+| to-issues | Break plans into independently-grabbable issues using vertical slices |
+| tdd | Test-driven development with red-green-refactor loop |
+| setup-project-skills | Scaffold per-repo configuration for issue tracker, triage labels, and domain docs |
+| improve-codebase-architecture | Find deepening opportunities for better testability and AI-navigability |
+| grill-with-docs | Stress-test plans against project's domain language and documented decisions |
+| diagnose | Disciplined diagnosis loop for hard bugs and performance regressions |
+| zoom-out | Get broader context and higher-level perspective on code |
 
 ## Usage
 
@@ -26,11 +26,9 @@ To use a skill in a conversation, reference it by name or load it explicitly.
 
 ## Adding New Skills
 
-Skills are installed to one of the following directories:
+Skills can be installed to one of the following directories:
 - `~/.claude/skills/`
 - `~/.config/opencode/skills/`
 - `~/.agents/skills/`
 
----
-
-*Personal curation by @phong* - Keeping the best tools at hand.
+Or kept within this repository under `engineering/`.
