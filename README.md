@@ -36,34 +36,22 @@ When using skills under `skills/engineering/`, first consult `WORKFLOW.md` to ch
 
 When working on a new project, set up the skills and workflow so agents can operate effectively:
 
-1. **Install engineering skills** into the project:
+1. **Install engineering skills** using the skills CLI:
    ```bash
-   # Clone into .agents/skills/
-   git clone https://github.com/org/agent-skills.git .agents/skills
-   
-   # Or copy from this repo
-   cp -r skills/engineering/* .agents/skills/
+   # Using GitHub CLI
+   gh skills install engineering
+
+   # Or using npx
+   npx skills add engineering
    ```
 
-2. **Copy `WORKFLOW.md`** into the project root:
-   ```bash
-   cp skills/engineering/WORKFLOW.md WORKFLOW.md
-   ```
+2. **Copy `WORKFLOW.md`** into the project root from the installed skills.
 
 3. **Append the workflow reference** to `AGENTS.md` (create if it doesn't exist):
-   ```bash
-   if [ -f AGENTS.md ]; then
-     echo "" >> AGENTS.md
-     echo "## Engineering Skills Workflow" >> AGENTS.md
-     echo "" >> AGENTS.md
-     echo "When using skills under \`skills/engineering/\`, first consult \`WORKFLOW.md\` to choose the appropriate workflow. Treat this file as the skill router and the individual \`SKILL.md\` files as the detailed procedures." >> AGENTS.md
-   else
-     echo "# AGENTS.md" > AGENTS.md
-     echo "" >> AGENTS.md
-     echo "## Engineering Skills Workflow" >> AGENTS.md
-     echo "" >> AGENTS.md
-     echo "When using skills under \`skills/engineering/\`, first consult \`WORKFLOW.md\` to choose the appropriate workflow. Treat this file as the skill router and the individual \`SKILL.md\` files as the detailed procedures." >> AGENTS.md
-   fi
+   ```markdown
+   ## Engineering Skills Workflow
+
+   When using skills under `skills/engineering/`, first consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
    ```
 
 ## Adding New Skills
