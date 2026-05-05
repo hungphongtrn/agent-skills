@@ -60,6 +60,10 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+## 5. Engineering Skills Workflow
+
+When using skills under `skills/engineering/`, first consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
+
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.

@@ -26,6 +26,46 @@ These skills are located in the `engineering/` directory:
 
 To use a skill in a conversation, reference it by name or load it explicitly.
 
+For engineering skills, add this to `AGENTS.md` so agents choose the right workflow first:
+
+```markdown
+When using skills under `skills/engineering/`, first consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
+```
+
+## Setting Up In A New Project
+
+When working on a new project, set up the skills and workflow so agents can operate effectively:
+
+1. **Install engineering skills** into the project:
+   ```bash
+   # Clone into .agents/skills/
+   git clone https://github.com/org/agent-skills.git .agents/skills
+   
+   # Or copy from this repo
+   cp -r skills/engineering/* .agents/skills/
+   ```
+
+2. **Copy `WORKFLOW.md`** into the project root:
+   ```bash
+   cp skills/engineering/WORKFLOW.md WORKFLOW.md
+   ```
+
+3. **Append the workflow reference** to `AGENTS.md` (create if it doesn't exist):
+   ```bash
+   if [ -f AGENTS.md ]; then
+     echo "" >> AGENTS.md
+     echo "## Engineering Skills Workflow" >> AGENTS.md
+     echo "" >> AGENTS.md
+     echo "When using skills under \`skills/engineering/\`, first consult \`WORKFLOW.md\` to choose the appropriate workflow. Treat this file as the skill router and the individual \`SKILL.md\` files as the detailed procedures." >> AGENTS.md
+   else
+     echo "# AGENTS.md" > AGENTS.md
+     echo "" >> AGENTS.md
+     echo "## Engineering Skills Workflow" >> AGENTS.md
+     echo "" >> AGENTS.md
+     echo "When using skills under \`skills/engineering/\`, first consult \`WORKFLOW.md\` to choose the appropriate workflow. Treat this file as the skill router and the individual \`SKILL.md\` files as the detailed procedures." >> AGENTS.md
+   fi
+   ```
+
 ## Adding New Skills
 
 Skills can be installed to one of the following directories:
