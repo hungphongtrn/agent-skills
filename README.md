@@ -36,22 +36,20 @@ When using skills under `skills/engineering/`, first consult `WORKFLOW.md` to ch
 
 When working on a new project, set up the skills and workflow so agents can operate effectively:
 
-1. **Install engineering skills** using the skills CLI:
+1. **Clone the engineering skills** into your project's `.agents/skills/` directory:
    ```bash
-   # Using GitHub CLI
-   gh skills install engineering
-
-   # Or using npx
-   npx skills add engineering
+   git clone https://github.com/hungphongtrn/agent-skills.git .agents/skills/agent-skills
+   # Then copy or symlink the engineering skills
+   cp -r .agents/skills/agent-skills/skills/engineering/* .agents/skills/
    ```
 
 2. **Download `WORKFLOW.md`** into the project root:
    ```bash
    # Using curl
-   curl -o WORKFLOW.md https://raw.githubusercontent.com/your-org/agent-skills/main/WORKFLOW.md
+   curl -o WORKFLOW.md https://raw.githubusercontent.com/hungphongtrn/agent-skills/main/WORKFLOW.md
 
    # Or using wget
-   wget https://raw.githubusercontent.com/your-org/agent-skills/main/WORKFLOW.md
+   wget https://raw.githubusercontent.com/hungphongtrn/agent-skills/main/WORKFLOW.md
    ```
 
 3. **Append the workflow reference** to `AGENTS.md` (create if it doesn't exist):
