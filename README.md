@@ -45,7 +45,14 @@ When working on a new project, set up the skills and workflow so agents can oper
    npx skills add engineering
    ```
 
-2. **Copy `WORKFLOW.md`** into the project root from the installed skills.
+2. **Download `WORKFLOW.md`** into the project root:
+   ```bash
+   # Using curl
+   curl -o WORKFLOW.md https://raw.githubusercontent.com/your-org/agent-skills/main/WORKFLOW.md
+
+   # Or using wget
+   wget https://raw.githubusercontent.com/your-org/agent-skills/main/WORKFLOW.md
+   ```
 
 3. **Append the workflow reference** to `AGENTS.md` (create if it doesn't exist):
    ```markdown
