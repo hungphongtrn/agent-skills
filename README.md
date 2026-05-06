@@ -29,7 +29,7 @@ To use a skill in a conversation, reference it by name or load it explicitly.
 For engineering skills, add this to `AGENTS.md` so agents choose the right workflow first:
 
 ```markdown
-When using skills under `skills/engineering/`, first consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
+Consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
 ```
 
 ## Setting Up In A New Project
@@ -61,7 +61,7 @@ When working on a new project, set up the skills and workflow so agents can oper
    ```markdown
    ## Engineering Skills Workflow
 
-   When using skills under `skills/engineering/`, first consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
+   Consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
    ```
 
 ## Adding New Skills
