@@ -62,7 +62,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## 5. Engineering Skills Workflow
 
-When using skills under `skills/engineering/`, first consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
+consult `WORKFLOW.md` to choose the appropriate workflow. Treat this file as the skill router and the individual `SKILL.md` files as the detailed procedures.
 
 ---
 
