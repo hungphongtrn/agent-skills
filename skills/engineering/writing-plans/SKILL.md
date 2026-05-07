@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Use when you have a spec or requirements for a multi-step task, before touching code. Creates implementation plans in progressive disclosure layers rather than one massive document.
+description: Use for a ready-for-agent GitHub leaf issue before touching implementation code. Creates committed implementation plans in progressive disclosure layers rather than one massive document.
 ---
 
 # Writing Plans (Progressive Disclosure)
@@ -8,6 +8,8 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 ## Overview
 
 Build implementation plans in **progressive disclosure layers** rather than one massive document. Start with high-level strategy, then expand phases iteratively as you approach implementation. This prevents plan fatigue and allows adaptation based on early learning.
+
+Use this skill only for a `ready-for-agent` GitHub leaf issue. Plans are durable implementation artifacts: create them in an isolated implementation branch/worktree, commit them before code changes begin, and comment the plan path on the source issue.
 
 **Core principle:** Reveal detail only when needed. The implementer shouldn't need to read 50 tasks to understand the first 3.
 
@@ -23,6 +25,12 @@ docs/plans/YYYY-MM-DD-<feature-name>/
 ├── phase-02-<name>.md     # Phase 2: stubbed initially, detailed before implementation
 ├── phase-03-<name>.md     # Phase 3: stubbed initially, detailed before implementation
 └── decisions.md           # ADR-style log of decisions made during planning
+```
+
+For GitHub issue execution, include the issue number in the directory name:
+
+```
+docs/plans/YYYY-MM-DD-issue-<number>-<slug>/
 ```
 
 ## Layer 1: Strategy Document (strategy.md)
@@ -144,7 +152,7 @@ The README is the entry point. It stays current as phases complete.
 ```markdown
 # [Feature Name] Implementation Plan
 
-> **For agentic workers:** Use subagent-driven-development or executing-plans. Start with the current phase — don't read ahead.
+> **For agentic workers:** Use subagent-driven-development. Start with the current phase — don't read ahead.
 
 ## Quick Status
 - **Current Phase:** Phase 1 - Foundation
@@ -185,7 +193,7 @@ See [decisions.md](./decisions.md) for rationale on major choices.
 - Leave Phase 2+ as stubs with just "Phase 2: [Name] - TBD"
 
 ### Step 3: Implement Phase 1
-- Hand off to subagent-driven-development or executing-plans
+- Hand off to subagent-driven-development
 - As Phase 1 completes, learnings emerge
 
 ### Step 4: Adapt & Detail Phase 2
@@ -248,9 +256,15 @@ When you DO write detailed tasks for a phase, they must be complete:
 
 **1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks
 
-**2. Inline Execution** - Execute tasks in this session using executing-plans
+**2. Pause after planning** - Plan is committed and linked from the issue; implementation can happen later
 
 **Which approach for Phase 1?"**
+
+Before implementation begins:
+
+1. Commit the plan directory.
+2. Comment on the GitHub issue with the plan path.
+3. Continue with `subagent-driven-development` only if the user requested execution or explicitly says to proceed.
 
 ## After Each Phase Completes
 

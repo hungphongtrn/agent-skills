@@ -1,15 +1,17 @@
 ---
 name: subagent-driven-development
-description: Use when executing implementation plans with independent tasks in the current session
+description: Use when executing committed progressive plans for ready-for-agent GitHub issues with independent tasks in the current session
 ---
 
 # Subagent-Driven Development
 
-Execute plan by dispatching fresh subagent per task, with two-stage review after each: spec compliance review first, then code quality review.
+Execute a committed progressive plan by dispatching fresh subagent per task, with two-stage review after each: spec compliance review first, then code quality review.
 
 **Why subagents:** You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.
 
 **Core principle:** Fresh subagent per task + two-stage review (spec then quality) = high quality, fast iteration
+
+Use this only after the source GitHub issue is `ready-for-agent`, `using-git-worktrees` has established an isolated workspace, and `writing-plans` has created and committed the issue-numbered plan directory.
 
 ## When to Use
 
@@ -17,21 +19,20 @@ Execute plan by dispatching fresh subagent per task, with two-stage review after
 digraph when_to_use {
     "Have implementation plan?" [shape=diamond];
     "Tasks mostly independent?" [shape=diamond];
-    "Stay in this session?" [shape=diamond];
+    "Can execute safely in this session?" [shape=diamond];
     "subagent-driven-development" [shape=box];
-    "executing-plans" [shape=box];
-    "Manual execution or brainstorm first" [shape=box];
+    "Revise plan, split issue, or ask maintainer" [shape=box];
 
     "Have implementation plan?" -> "Tasks mostly independent?" [label="yes"];
-    "Have implementation plan?" -> "Manual execution or brainstorm first" [label="no"];
-    "Tasks mostly independent?" -> "Stay in this session?" [label="yes"];
-    "Tasks mostly independent?" -> "Manual execution or brainstorm first" [label="no - tightly coupled"];
-    "Stay in this session?" -> "subagent-driven-development" [label="yes"];
-    "Stay in this session?" -> "executing-plans" [label="no - parallel session"];
+    "Have implementation plan?" -> "Revise plan, split issue, or ask maintainer" [label="no"];
+    "Tasks mostly independent?" -> "Can execute safely in this session?" [label="yes"];
+    "Tasks mostly independent?" -> "Revise plan, split issue, or ask maintainer" [label="no - tightly coupled"];
+    "Can execute safely in this session?" -> "subagent-driven-development" [label="yes"];
+    "Can execute safely in this session?" -> "Revise plan, split issue, or ask maintainer" [label="no"];
 }
 ```
 
-**vs. Executing Plans (parallel session):**
+**Why same-session subagent execution:**
 - Same session (no context switch)
 - Fresh subagent per task (no context pollution)
 - Two-stage review after each task: spec compliance first, then code quality
@@ -58,12 +59,12 @@ digraph process {
         "Mark task complete in TodoWrite" [shape=box];
     }
 
-    "Read plan, extract all tasks with full text, note context, create TodoWrite" [shape=box];
+    "Read committed plan and source issue, extract current tasks with full text, note context, create TodoWrite" [shape=box];
     "More tasks remain?" [shape=diamond];
     "Dispatch final code reviewer subagent for entire implementation" [shape=box];
     "Finalize development branch" [shape=box style=filled fillcolor=lightgreen];
 
-    "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
+    "Read committed plan and source issue, extract current tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
     "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent asks questions?";
     "Implementer subagent asks questions?" -> "Answer questions, provide context" [label="yes"];
     "Answer questions, provide context" -> "Dispatch implementer subagent (./implementer-prompt.md)";
@@ -128,7 +129,8 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 ```
 You: I'm using Subagent-Driven Development to execute this plan.
 
-[Read plan file once: docs/plans/feature-plan.md]
+[Read committed plan file once: docs/plans/YYYY-MM-DD-issue-<number>-<slug>/README.md]
+[Read source GitHub issue and linked comments]
 [Extract all 5 tasks with full text and context]
 [Create TodoWrite with all tasks]
 
@@ -265,13 +267,12 @@ Done!
 ## Integration
 
 **Required workflow skills:**
-- **using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
+- **using-git-worktrees** - REQUIRED: Set up isolated workspace before planning/implementation
 - **writing-plans** - Creates the plan this skill executes
 - **requesting-code-review** - Code review template for reviewer subagents
 - **finishing-a-development-branch** - Complete development after all tasks
 
 **Subagents should use:**
-- **test-driven-development** - Subagents follow TDD for each task
+- **tdd** - Subagents follow TDD for behavior-bearing tasks
 
-**Alternative workflow:**
-- **executing-plans** - Use for parallel session instead of same-session execution
+If a task cannot be executed safely by subagents, stop and ask the maintainer whether to split the issue further, revise the plan, or handle the work manually.

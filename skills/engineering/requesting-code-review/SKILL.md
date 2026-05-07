@@ -7,6 +7,8 @@ description: Use when completing tasks, implementing major features, or before m
 
 Dispatch code-reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
 
+For issue-backed work, include the source GitHub issue, committed plan path, and acceptance criteria in the review context.
+
 **Core principle:** Review early, review often.
 
 ## When to Request Review
@@ -36,6 +38,8 @@ Use Task tool with code-reviewer type, fill template at `code-reviewer.md`
 **Placeholders:**
 - `{WHAT_WAS_IMPLEMENTED}` - What you just built
 - `{PLAN_OR_REQUIREMENTS}` - What it should do
+- `{SOURCE_ISSUE}` - GitHub issue number/URL and acceptance criteria, if issue-backed
+- `{PLAN_PATH}` - Committed plan path, if issue-backed
 - `{BASE_SHA}` - Starting commit
 - `{HEAD_SHA}` - Ending commit
 - `{DESCRIPTION}` - Brief summary

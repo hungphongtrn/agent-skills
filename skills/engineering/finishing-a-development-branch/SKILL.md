@@ -1,6 +1,6 @@
 ---
 name: finishing-a-development-branch
-description: Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup
+description: Use when implementation is complete, tests pass, review is done, and you need to update the source GitHub issue and integrate the work through merge, PR, keep, or cleanup
 ---
 
 # Finishing a Development Branch
@@ -9,7 +9,7 @@ description: Use when implementation is complete, all tests pass, and you need t
 
 Guide completion of development work by presenting clear options and handling chosen workflow.
 
-**Core principle:** Verify tests → Present options → Execute choice → Clean up.
+**Core principle:** Verify tests → Update source issue → Present options → Execute choice → Clean up.
 
 **Announce at start:** "I'm using the finishing-a-development-branch skill to complete this work."
 
@@ -36,6 +36,18 @@ Cannot proceed with merge/PR until tests pass.
 Stop. Don't proceed to Step 2.
 
 **If tests pass:** Continue to Step 2.
+
+### Step 1b: Update Source Issue
+
+Before presenting branch finish options, update the source GitHub issue with:
+
+- implementation summary
+- verification performed
+- PR link or commit reference if already available
+- follow-up issues created, if any
+- whether acceptance criteria are complete
+
+Do not close the issue yet unless the work is already merged. If creating a PR, use GitHub closing keywords in the PR body only when acceptance criteria are complete and the PR should close the issue on merge.
 
 ### Step 2: Determine Base Branch
 
@@ -188,6 +200,10 @@ git worktree remove <worktree-path>
 - **Problem:** Remove worktree when might need it (Option 2, 3)
 - **Fix:** Only cleanup for Options 1 and 4
 
+**Forgetting issue memory**
+- **Problem:** Branch or PR is finished but the source issue does not record what changed or how it was verified
+- **Fix:** Update the source issue before presenting finish options
+
 **No confirmation for discard**
 - **Problem:** Accidentally delete work
 - **Fix:** Require typed "discard" confirmation
@@ -199,9 +215,11 @@ git worktree remove <worktree-path>
 - Merge without verifying tests on result
 - Delete work without confirmation
 - Force-push without explicit request
+- Finish issue-backed work without updating the source GitHub issue
 
 **Always:**
 - Verify tests before offering options
+- Update the source GitHub issue with summary and verification
 - Present exactly 4 options
 - Get typed confirmation for Option 4
 - Clean up worktree for Options 1 & 4 only

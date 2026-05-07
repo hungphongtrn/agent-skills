@@ -1,10 +1,10 @@
 ---
-description: Triage issues through a state machine driven by triage roles. Use when user wants to create an issue, triage issues, review incoming bugs or feature requests, prepare issues for an AFK agent, or manage issue workflow.
+description: Triage GitHub issues through a state machine driven by category and state roles. Use when user wants to see what needs attention, triage issues, prepare issues for an AFK agent, or manage issue workflow.
 name: triage
 ---
 # Triage
 
-Move issues on the project issue tracker through a small state machine of triage roles.
+Move GitHub issues through a small state machine of triage roles. Triage is the gate between issue creation and planning/implementation.
 
 Every comment or issue posted to the issue tracker during triage **must** start with this disclaimer:
 
@@ -22,14 +22,14 @@ Every comment or issue posted to the issue tracker during triage **must** start 
 Two **category** roles:
 
 - `bug` — something is broken
-- `enhancement` — new feature or improvement
+- `enhancement` — new feature, research idea, or improvement
 
 Five **state** roles:
 
 - `needs-triage` — maintainer needs to evaluate
 - `needs-info` — waiting on reporter for more information
 - `ready-for-agent` — fully specified, ready for an AFK agent
-- `ready-for-human` — needs human implementation
+- `ready-for-human` — valid work that needs human judgment, access, or manual action before agent execution is safe
 - `wontfix` — will not be actioned
 
 Every triaged issue should carry exactly one category role and one state role. If state roles conflict, flag it and ask the maintainer before doing anything else.
@@ -46,6 +46,7 @@ The maintainer invokes `/triage` and describes what they want in natural languag
 - "Let's look at #42"
 - "Move #42 to ready-for-agent"
 - "What's ready for agents to pick up?"
+- "What should I work on next?"
 
 ## Show what needs attention
 
@@ -57,6 +58,20 @@ Query the issue tracker and present three buckets, oldest first:
 
 Show counts and a one-line summary per issue. Let the maintainer pick.
 
+## Show next work
+
+If the user asks what to work on next, query GitHub Issues and present:
+
+1. **Maintainer attention first** — unlabeled issues, `needs-triage`, `needs-info` with reporter activity, and `ready-for-human`.
+2. **Execution-ready work** — unblocked `ready-for-agent` leaf issues, oldest first.
+
+Recommend the next action:
+
+- triage a specific issue
+- answer a human-blocked issue
+- execute an unblocked `ready-for-agent` issue
+- decompose an issue further with `grill-with-docs` and `to-issues`
+
 ## Triage a specific issue
 
 1. **Gather context.** Read the full issue (body, comments, labels, reporter, dates). Parse any prior triage notes so you don't re-ask resolved questions. Explore the codebase using the project's domain glossary, respecting ADRs in the area. Read `.out-of-scope/*.md` and surface any prior rejection that resembles this issue.
@@ -65,11 +80,11 @@ Show counts and a one-line summary per issue. Let the maintainer pick.
 
 3. **Reproduce (bugs only).** Before any grilling, attempt reproduction: read the reporter's steps, trace the relevant code, run tests or commands. Report what happened — successful repro with code path, failed repro, or insufficient detail (a strong `needs-info` signal). A confirmed repro makes a much stronger agent brief.
 
-4. **Grill (if needed).** If the issue needs fleshing out, run a `/grill-with-docs` session.
+4. **Grill or decompose (if needed).** If the issue needs fleshing out, run a `/grill-with-docs` session. If it is valid but too broad, recommend `grill-with-docs` followed by `to-issues` instead of moving it to execution.
 
 5. **Apply the outcome:**
    - `ready-for-agent` — post an agent brief comment ([AGENT-BRIEF.md](AGENT-BRIEF.md)).
-   - `ready-for-human` — same structure as an agent brief, but note why it can't be delegated (judgment calls, external access, design decisions, manual testing).
+   - `ready-for-human` — post a Human Brief explaining why it cannot be delegated yet and exactly what human decision/action is needed.
    - `needs-info` — post triage notes (template below).
    - `wontfix` (bug) — polite explanation, then close.
    - `wontfix` (enhancement) — write to `.out-of-scope/`, link to it from a comment, then close ([OUT-OF-SCOPE.md](OUT-OF-SCOPE.md)).
@@ -78,6 +93,24 @@ Show counts and a one-line summary per issue. Let the maintainer pick.
 ## Quick state override
 
 If the maintainer says "move #42 to ready-for-agent", trust them and apply the role directly. Confirm what you're about to do (role changes, comment, close), then act. Skip grilling. If moving to `ready-for-agent` without a grilling session, ask whether they want to write an agent brief.
+
+Do not proceed from triage into planning or implementation unless the user requested execution or explicitly says to proceed. Only `ready-for-agent` leaf issues can enter `writing-plans` and implementation.
+
+## Human Brief template
+
+```markdown
+## Human Brief
+
+**Why this is not ready for an agent:**
+Short reason.
+
+**Human decision/action needed:**
+- Specific action 1
+- Specific action 2
+
+**What happens next:**
+After this is resolved, re-triage into `ready-for-agent`, split into smaller issues, or close.
+```
 
 ## Needs-info template
 

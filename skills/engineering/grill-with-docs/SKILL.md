@@ -74,6 +74,10 @@ When a term is resolved, update `CONTEXT.md` right there. Don't batch these up â
 
 Don't couple `CONTEXT.md` to implementation details. Only include terms that are meaningful to domain experts.
 
+### Update related GitHub issues
+
+If the grilling session is tied to a GitHub issue or PRD, summarize resolved decisions in an issue comment. Link any updated `CONTEXT.md` entries or ADR files so issue readers can follow the decision trail without relying on chat history.
+
 ### Offer ADRs sparingly
 
 Only offer to create an ADR when all three are true:
