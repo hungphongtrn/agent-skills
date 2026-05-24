@@ -1,9 +1,9 @@
 ---
-name: continue-handoff
+name: handoff
 description: Create a focused handoff for continuing paused multi-phase work. Use when the user wants to hand off work to a future session, pause a multi-phase implementation, or prepare context for an AFK agent.
 ---
 
-# continue-handoff
+# handoff
 
 Use this skill when work is mid-flight and a fresh agent must resume quickly.
 
